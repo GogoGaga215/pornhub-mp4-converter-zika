@@ -78,10 +78,8 @@
 </head>
 <body class="min-h-screen flex flex-col font-sans selection:bg-emerald-500/30 selection:text-emerald-400">
 
-  <!-- Glow Background Accent -->
   <div class="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[350px] bg-emerald-500/10 blur-[120px] pointer-events-none rounded-full animate-pulse-glow"></div>
 
-  <!-- Header -->
   <header class="w-full border-b border-dark-border/60 bg-dark-bg/80 backdrop-blur-md sticky top-0 z-50">
     <div class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -103,10 +101,8 @@
     </div>
   </header>
 
-  <!-- Main Container -->
   <main class="flex-1 max-w-4xl w-full mx-auto px-6 pt-12 pb-24 flex flex-col justify-center">
 
-    <!-- Hero Title -->
     <div class="text-center mb-10 space-y-3">
       <h1 class="text-4xl sm:text-5xl font-bold tracking-tight text-white">
         High-Speed Media Converter
@@ -116,10 +112,8 @@
       </p>
     </div>
 
-    <!-- Converter Card -->
     <div class="glass-panel rounded-2xl p-6 sm:p-8 gradient-border shadow-2xl space-y-6">
 
-      <!-- URL Input Group -->
       <div class="space-y-2">
         <label for="video-url" class="block text-xs font-semibold uppercase tracking-wider text-zinc-400">
           Source URL Address
@@ -150,7 +144,6 @@
         </div>
       </div>
 
-      <!-- Error Box -->
       <div id="error-card" class="hidden p-4 rounded-xl bg-red-950/40 border border-red-800/50 text-red-300 text-sm flex items-start gap-3 animate-fade-in">
         <svg class="w-5 h-5 text-red-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -158,7 +151,6 @@
         <div id="error-text" class="break-words w-full">An error occurred while processing the URL.</div>
       </div>
 
-      <!-- Loading State Skeleton -->
       <div id="loading-state" class="hidden py-8 space-y-4 text-center">
         <div class="inline-flex items-center justify-center p-3 rounded-full bg-zinc-800/60 border border-zinc-700/50 text-emerald-400 animate-spin">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -168,40 +160,31 @@
         <p class="text-sm font-medium text-zinc-300">Extracting video streams and available resolutions...</p>
       </div>
 
-      <!-- Video Result Panel -->
       <div id="result-panel" class="hidden space-y-6 pt-4 border-t border-dark-border/60 animate-fade-in">
         
-        <!-- Video Player Component with Thumbnail & Overlay Play Button -->
         <div class="space-y-2">
           <div class="flex items-center justify-between">
             <span class="text-xs font-semibold uppercase tracking-wider text-zinc-400">Media Preview Player</span>
             <span id="meta-duration" class="text-xs font-mono text-emerald-400 bg-emerald-500/10 px-2.5 py-0.5 rounded-full border border-emerald-500/20">00:00</span>
           </div>
 
-          <!-- Video Frame / Player Shell -->
           <div class="relative w-full aspect-video rounded-xl overflow-hidden bg-black border border-dark-border group shadow-2xl">
             
-            <!-- Video Player (Hidden by default, shown when play button is clicked) -->
             <video id="video-player" class="hidden w-full h-full object-contain bg-black" controls></video>
 
-            <!-- Thumbnail Container & Circular Overlay Play Button -->
             <div id="thumbnail-wrapper" class="relative w-full h-full cursor-pointer overflow-hidden" onclick="playEmbeddedVideo()">
               <img id="meta-thumb" src="" alt="Video Thumbnail" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
               
-              <!-- Dark Overlay Gradient -->
               <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent transition-opacity duration-300 group-hover:opacity-90"></div>
 
-              <!-- Circle & Triangle Play Button Overlay -->
               <div class="absolute inset-0 flex items-center justify-center">
                 <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-emerald-500/90 text-white flex items-center justify-center shadow-2xl shadow-emerald-950/80 transform group-hover:scale-110 group-hover:bg-emerald-400 transition-all duration-300 backdrop-blur-md border border-emerald-300/40">
-                  <!-- Triangle Play Icon -->
                   <svg class="w-7 h-7 sm:w-8 sm:h-8 fill-current translate-x-0.5" viewBox="0 0 24 24">
                     <path d="M8 5v14l11-7z"/>
                   </svg>
                 </div>
               </div>
 
-              <!-- Title & Uploader Overlay Text -->
               <div class="absolute bottom-4 left-4 right-4 pointer-events-none">
                 <h3 id="meta-title" class="text-base sm:text-lg font-bold text-white truncate drop-shadow-md">Video Title</h3>
                 <p id="meta-uploader" class="text-xs text-zinc-300 flex items-center gap-1 mt-0.5 drop-shadow">
@@ -216,17 +199,14 @@
           </div>
         </div>
 
-        <!-- Format & Quality Selector -->
         <div class="space-y-2">
           <label class="block text-xs font-semibold uppercase tracking-wider text-zinc-400">
             Target Quality
           </label>
           <div id="format-list" class="grid grid-cols-2 sm:grid-cols-3 gap-2">
-            <!-- Format buttons injected dynamically -->
           </div>
         </div>
 
-        <!-- Action Button -->
         <button 
           id="btn-convert"
           onclick="startConversion()"
@@ -238,7 +218,6 @@
           <span>Convert and Download MP4</span>
         </button>
 
-        <!-- Progress Bar Component -->
         <div id="progress-container" class="hidden space-y-2">
           <div class="flex justify-between text-xs text-zinc-400 font-mono">
             <span id="progress-status">Processing media encoding...</span>
@@ -255,7 +234,6 @@
 
     </div>
 
-    <!-- Feature Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-12">
       <div class="p-4 rounded-xl border border-dark-border/40 bg-dark-card/40 space-y-1">
         <div class="text-emerald-400 mb-2">
@@ -402,9 +380,7 @@
         videoPlayer.src = streamUrl;
         thumbWrapper.classList.add('hidden');
         videoPlayer.classList.remove('hidden');
-        videoPlayer.play().catch(() => {
-          // Fallback if autoplay policy blocks media start
-        });
+        videoPlayer.play().catch(() => {});
       }
     }
 
@@ -416,7 +392,6 @@
       });
       targetBtn.className = 'p-3 rounded-xl border text-left text-xs transition-all font-mono flex flex-col justify-between border-emerald-500 bg-emerald-500/10 text-emerald-300';
 
-      // Update active player source if player is currently playing
       const videoPlayer = document.getElementById('video-player');
       if (streamUrl && !videoPlayer.classList.contains('hidden')) {
         videoPlayer.src = streamUrl;
