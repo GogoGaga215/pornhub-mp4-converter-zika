@@ -3,9 +3,9 @@ import tempfile
 import streamlit as st
 import yt_dlp
 
-st.set_page_config(page_title="PornHub Mp4 Converter", layout="centered")
+st.set_page_config(page_title="MP4 Converter Engine", layout="centered")
 
-st.title("PornHub Mp4 Converter")
+st.title("MP4 Converter Engine")
 st.write("Extract and convert media streams to MP4 using yt-dlp and ffmpeg.")
 
 if "info" not in st.session_state:
@@ -14,6 +14,14 @@ if "url" not in st.session_state:
     st.session_state.url = ""
 
 url_input = st.text_input("Enter Media URL:", value=st.session_state.url, placeholder="https://...")
+
+# Browser emulation headers to prevent 403 Forbidden errors
+BROWSER_HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.9",
+    "Referer": "https://www.pornhub.com/",
+}
 
 if st.button("Fetch Media Info"):
     clean_url = url_input.strip()
@@ -27,6 +35,8 @@ if st.button("Fetch Media Info"):
                     "quiet": True,
                     "no_warnings": True,
                     "extract_flat": False,
+                    "nocheckcertificate": True,
+                    "http_headers": BROWSER_HEADERS,
                 }
                 with yt_dlp.YoutubeDL(ydl_opts) as ydl:
                     info = ydl.extract_info(clean_url, download=False)
@@ -91,6 +101,8 @@ if st.session_state.info:
                         "merge_output_format": "mp4",
                         "quiet": True,
                         "no_warnings": True,
+                        "nocheckcertificate": True,
+                        "http_headers": BROWSER_HEADERS,
                     }
 
                     with yt_dlp.YoutubeDL(ydl_opts_dl) as ydl:
