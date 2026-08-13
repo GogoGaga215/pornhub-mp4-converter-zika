@@ -34,7 +34,6 @@ def fetch_info():
             seen_heights = set()
             raw_formats = info.get('formats', [])
             
-            # Find direct stream url for video player preview
             preview_stream_url = info.get('url')
             
             for f in reversed(raw_formats):
